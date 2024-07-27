@@ -408,7 +408,7 @@ if __name__ == '__main__':
     print ('The PSNR After add noise %f' % PSNR(ori, img))
     # 记录程序运行时间
     """
-    img = cv2.imread('./denoising1.bmp',cv2.IMREAD_GRAYSCALE)
+    img = cv2.imread('./img/denoising1.bmp',cv2.IMREAD_GRAYSCALE)
     # e1 = cv2.getTickCount()  # cv2.getTickCount 函数返回从参考点到这个函数被执行的时钟数
     # if(img is not None):
     #     print("success")
@@ -420,13 +420,13 @@ if __name__ == '__main__':
 
     # print ("The PSNR between the two img of the First step is %f" % PSNR(ori, Basic_img))
 
-    Basic_img = cv2.imread("Basic3.jpg", cv2.IMREAD_GRAYSCALE)
+    Basic_img = cv2.imread("./img/Basic3.jpg", cv2.IMREAD_GRAYSCALE)
 
     Final_img = BM3D_2nd_step(Basic_img, img)
     e3 = cv2.getTickCount()
     # time = (e3 - e2) / cv2.getTickFrequency()
     # print ("The Processing time of the Second step2 is %f s" % time)
-    cv2.imwrite("Final3.jpg", Final_img)
+    cv2.imwrite("./img/Final3.jpg", Final_img)
 
     # print ("The PSNR between the two img of the Second step is %f" % PSNR(ori, Final_img))
     # time = (e3 - e1) / cv2.getTickFrequency()

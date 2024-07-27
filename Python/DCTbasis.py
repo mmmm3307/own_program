@@ -32,13 +32,19 @@ DCTbasis_bin = [[0.5000, 0.5000, 0.5000, 0.5000],
                 [0.5000, -0.5000, -0.5000, 0.5000],
                 [0.28125, -0.625, 0.625, -0.28125]]
 
+DCTbasis1 = [[0.5, 0.5, 0.5, 0.5],
+             [0.65625, 0.2734375, -0.2734375, -0.65625],
+             [0.5, -0.5, -0.5, 0.5],
+             [0.2734375, -0.65625, 0.65625, -0.2734375]]
+
 
 dct_4x4 = [[0.5, 0.5, 0.5, 0.5], [0.65328148, 0.27059805, -0.27059805, -0.65328148], 
            [0.5, -0.5, -0.5, 0.5], [0.27059805, -0.65328148, 0.65328148, -0.27059805]]
+
 dct_4x4_binary = [[0.5, 0.5, 0.5, 0.5], [0.625, 0.25, -0.25, -0.625],
                   [0.5, -0.5, -0.5, 0.5], [0.25, -0.625, 0.625, -0.25]]
-result = np.dot(np.transpose(dct_4x4_binary),dct_4x4_binary)
-inverse_result = np.linalg.inv(result)
-inverse_dct_4x4_binary = np.linalg.inv(dct_4x4_binary)
-a = [[0.5, 0.625, ]]
-print(f'result:\n{result}\ninverse_result:\n{inverse_result}\ninverse_dct_4x4_binary:\n{inverse_dct_4x4_binary}')
+result = np.dot(np.transpose(DCTbasis1),DCTbasis1)
+# inverse_result = np.linalg.inv(result)
+# inverse_dct_4x4_binary = np.linalg.inv(dct_4x4_binary)
+# print(f'result:\n{result}\ninverse_result:\n{inverse_result}\ninverse_dct_4x4_binary:\n{inverse_dct_4x4_binary}')
+print(f'{result}')

@@ -251,7 +251,7 @@ sampling_maps = generate_sampling_maps(width, height, patch_size, number_of_lut,
 sampling_map = get_sampling_from_lut(sampling_maps) 
 
 # input image 
-image = cv2.imread('./denoising1.bmp')
+image = cv2.imread('./img/denoising1.bmp')
 # print(f'imagebeforegray shape:{image.shape},type:{type(image)}')
 image = 0.299*image[:, :,0] + 0.587*image[:, :,1] + 0.114*image[:, :,2]
 # image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -276,7 +276,7 @@ denoised_image = np.array(denoised_image)
 # print(type(denoised_image))
 # print(denoised_image.shape)
 
-cv2.imwrite("./denoised.png",denoised_image)
+cv2.imwrite("./img/denoised.png",denoised_image)
 
 
 
