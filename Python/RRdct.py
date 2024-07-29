@@ -16,6 +16,11 @@ DCTbasis=[[0.3535533905932738, 0.3535533905932738, 0.3535533905932738, 0.3535533
 [0.19134171618254492, -0.4619397662556434, 0.46193976625564326, -0.19134171618254495, -0.19134171618254528, 0.46193976625564337, -0.4619397662556432, 0.19134171618254478],       
 [0.09754516100806417, -0.2777851165098011, 0.4157348061512728, -0.4903926402016153, 0.49039264020161527, -0.4157348061512725, 0.27778511650980076, -0.09754516100806429]]
 
+DCTbasis4x4 = [[0.5, 0.5, 0.5, 0.5],
+             [0.65625, 0.2734375, -0.2734375, -0.65625],
+             [0.5, -0.5, -0.5, 0.5],
+             [0.2734375, -0.65625, 0.65625, -0.2734375]]
+
 def dct_1d(data, basis):
     """ 8x1 1D DCT """
     result = [0.0] * 8
@@ -59,6 +64,48 @@ def idct_2d(patch, basis):
     
     return result
 
+def dct_1d_4x4(data, basis):
+    """ 4x1 1D DCT """
+    result = [0.0] * 4
+    for u in range(4):
+        sum_val = 0.0
+        for x in range(4):
+            sum_val += data[x] * basis[u][x]
+        result[u] = sum_val
+    return result
+
+def idct_1d_4x4(data, basis):
+    """ 4x1 1d IDCT"""
+    result = [0.0] * 4
+    for x in range(4):
+        sum_val = 0.0
+        for u in range(4):
+            sum_val += data[u] * basis[u][x]
+        result[x] = sum_val
+    return result
+
+def dct_2d_4x4(patch, basis):
+    """ 4x4 2D DCT """
+    # 对每一行进行4x1 1维 DCT
+    temp = [dct_1d(row, basis) for row in patch] 
+    # 对结果进行转置
+    transposed = [[temp[j][i] for j in range(4)] for i in range(4)] 
+    # 对转置后的结果的每一行进行4x1 1维 DCT
+    temp2 = [dct_1d(row, basis) for row in transposed]   
+    # 对结果进行转置
+    result = [[temp2[j][i] for j in range(4)] for i in range(4)]  
+
+    return result
+
+def idct_2d_4x4(patch, basis):
+    """ 4x4 2D IDCT """
+    # 与DCT一样
+    temp = [idct_1d(row, basis) for row in patch]   
+    transposed = [[temp[j][i] for j in range(4)] for i in range(4)]    
+    temp2 = [idct_1d(row, basis) for row in transposed]    
+    result = [[temp2[j][i] for j in range(4)] for i in range(4)]
+    
+    return result
 '''
 def dct_2d(patch, basis):
     """8x8 2D DCT """
@@ -165,6 +212,10 @@ def set_sampling_map(width, height, sampling_type, d):
                 kernel[y][x] = 255
     elif sampling_type == "POISSONDISK":
         set_poisson_disk(kernel, d)
+    elif sampling_type == "ALTERNATE":
+        for y in range(0, height, 2):
+            for x in range(0, width, 2):
+                kernel[y][x] = 255
     return kernel
 
 def generate_sampling_maps(width, height, patch_size, number_of_lut, d, sampling_type):

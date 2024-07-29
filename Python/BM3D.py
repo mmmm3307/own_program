@@ -14,14 +14,14 @@ sigma = 25
 Threshold_Hard3D = 2.7 * sigma  # Threshold for Hard Thresholding
 
 Step1_Blk_Size = 4  # block_Size即块的大小
-Step1_Blk_Step = 1  # Rather than sliding by one pixel to every next reference block, use a step of Nstep pixels in both horizontal and vertical directions.
+Step1_Blk_Step = 2  # Rather than sliding by one pixel to every next reference block, use a step of Nstep pixels in both horizontal and vertical directions.
 Step1_Search_Step = 1  # 块的搜索step
 First_Match_threshold = 125 * Step1_Blk_Size ** 2  # 用于计算block之间相似度的阈值
 Step1_max_matched_cnt = 16  # 组最大匹配的块数
 Step1_Search_Window = 15  # Search for candidate matching blocks in a local neighborhood of restricted size NS*NS centered
 
 Step2_Blk_Size = 4
-Step2_Blk_Step = 1
+Step2_Blk_Step = 2
 Step2_Search_Step = 1
 Second_Match_threshold = 220. / 16 * Step2_Blk_Size ** 2  # 用于计算block之间相似度的阈值
 Step2_max_matched_cnt = 32
@@ -412,21 +412,21 @@ if __name__ == '__main__':
     # e1 = cv2.getTickCount()  # cv2.getTickCount 函数返回从参考点到这个函数被执行的时钟数
     # if(img is not None):
     #     print("success")
-    # Basic_img = BM3D_1st_step(img)
+    Basic_img = BM3D_1st_step(img)
     # e2 = cv2.getTickCount()
     # time = (e2 - e1) / cv2.getTickFrequency()  # 计算函数执行时间
     # print ("The Processing time of the First step1 is %f s" % time)
-    # cv2.imwrite("Basic3.jpg", Basic_img)
+    # cv2.imwrite("./img/Basic3.jpg", Basic_img)
 
     # print ("The PSNR between the two img of the First step is %f" % PSNR(ori, Basic_img))
 
-    Basic_img = cv2.imread("./img/Basic3.jpg", cv2.IMREAD_GRAYSCALE)
+    # Basic_img = cv2.imread("./img/denoised.png", cv2.IMREAD_GRAYSCALE)
 
     Final_img = BM3D_2nd_step(Basic_img, img)
-    e3 = cv2.getTickCount()
+    # e3 = cv2.getTickCount()
     # time = (e3 - e2) / cv2.getTickFrequency()
     # print ("The Processing time of the Second step2 is %f s" % time)
-    cv2.imwrite("./img/Final3.jpg", Final_img)
+    cv2.imwrite("./img/BM3D_denoised_1withstepof2.png", Final_img)
 
     # print ("The PSNR between the two img of the Second step is %f" % PSNR(ori, Final_img))
     # time = (e3 - e1) / cv2.getTickFrequency()
