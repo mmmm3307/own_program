@@ -1,0 +1,6 @@
+include bm3d/__init__.py
+include bm3d/profiles.py
+include tests/*
+include examples/*
+include changelog.txt
+include LICENSE

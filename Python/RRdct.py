@@ -240,7 +240,6 @@ def extract_patches(image, sampling_map, patch_size):
                 coords.append((y, x))
     return patches, coords
 
-
 def hard_threshold(matrix, threshold):
     N = len(matrix)
     M = len(matrix[0])
@@ -302,18 +301,18 @@ sampling_maps = generate_sampling_maps(width, height, patch_size, number_of_lut,
 sampling_map = get_sampling_from_lut(sampling_maps) 
 
 # input image 
-image = cv2.imread('./img/denoising1.bmp')
+image = cv2.imread('./test/gray/gray3.jpg',cv2.IMREAD_GRAYSCALE)
 # print(f'imagebeforegray shape:{image.shape},type:{type(image)}')
-image = 0.299*image[:, :,0] + 0.587*image[:, :,1] + 0.114*image[:, :,2]
+# image = 0.299*image[:, :,0] + 0.587*image[:, :,1] + 0.114*image[:, :,2]
 # image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-# cv2.imwrite("./gray.png",image)
+# cv2.imwrite("./test_gray.jpg",image)
 # print(f'imageaftergray shape:{image.shape},type:{type(image)}')
 
 # 提取8x8的patches
 patches, coords = extract_patches(image, sampling_map, patch_size)
 
 # DCT变换，硬阈值处理，IDCT变换
-threshold = 50  # 设定硬阈值
+threshold = 25  # 设定硬阈值
 denoised_patches = []
 for patch in patches:
     dct_patch = dct_2d(patch,DCTbasis)
@@ -327,7 +326,7 @@ denoised_image = np.array(denoised_image)
 # print(type(denoised_image))
 # print(denoised_image.shape)
 
-cv2.imwrite("./img/denoised.png",denoised_image)
+cv2.imwrite("./test/DCT_gray3.jpg",denoised_image)
 
 
 
