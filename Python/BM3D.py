@@ -10,7 +10,7 @@ import numpy.matlib
 cv2.setUseOptimized(True)
 
 # Parameters initialization
-sigma = 5
+sigma = 10  # 噪声标准差
 lamda_2d = 0
 lamda_3d = 2.7
 Threshold_Hard3D = lamda_3d * sigma  # Threshold for Hard Thresholding
@@ -252,8 +252,8 @@ def Aggregation_hardthreshold(_similar_blocks, blk_positions, m_basic_img, m_wig
         point = blk_positions[i, :]
         tem_img = block_wight * cv2.idct(_similar_blocks[i, :, :]) # 2D IDCT
         m_basic_img[point[0]:point[0] + _shape[1], point[1]:point[1] + _shape[2]] += tem_img # 把所有滤波、反变换后的相似块放回原处
-        # m_wight_img[point[0]:point[0] + _shape[1], point[1]:point[1] + _shape[2]] += block_wight
-        m_wight_img[point[0]:point[0] + _shape[1], point[1]:point[1] + _shape[2]] += img_weight
+        m_wight_img[point[0]:point[0] + _shape[1], point[1]:point[1] + _shape[2]] += block_wight
+        # m_wight_img[point[0]:point[0] + _shape[1], point[1]:point[1] + _shape[2]] += img_weight
 
 
 def BM3D_1st_step(_noisyImg):
@@ -458,12 +458,12 @@ if __name__ == '__main__':
     
     cv2.setUseOptimized(True)  # OpenCV 中的很多函数都被优化过（使用 SSE2，AVX 等）。也包含一些没有被优化的代码。使用函数 cv2.setUseOptimized() 来开启优化。
 
-    img = cv2.imread('/home/ciiv04/program/own_program/Python/test/gray/gray1.jpg',cv2.IMREAD_GRAYSCALE)
+    img = cv2.imread('/home/ciiv04/program/own_program/Python/test/hw1.png',cv2.IMREAD_GRAYSCALE)
     Basic_img = BM3D_1st_step(img)
-    cv2.imwrite("/home/ciiv04/program/own_program/Python/test/BM3D/basic/basic1.jpg", Basic_img)
+    cv2.imwrite("/home/ciiv04/program/own_program/Python/test/BM3D/basic/hw1_basic.jpg", Basic_img)
 
     # Basic_img = cv2.imread("./img/denoised.png", cv2.IMREAD_GRAYSCALE)
 
     Final_img = BM3D_2nd_step(Basic_img, img)
-    cv2.imwrite("/home/ciiv04/program/own_program/Python/test/BM3D/final/final1.jpg", Final_img)
+    cv2.imwrite("/home/ciiv04/program/own_program/Python/test/BM3D/final/hw1_final.jpg", Final_img)
 

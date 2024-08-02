@@ -291,7 +291,7 @@ def patches_to_image(patches, coords, width, height, patch_size):
 #     return thresholded_patch
 
 # 生成1920x1080的采样图和采样图LUT
-width, height  = 1920, 1080
+width, height  = 640, 480
 patch_size = 8
 number_of_lut = 1   #生成查找表个数
 d = 3  # 设定mind值
@@ -301,7 +301,7 @@ sampling_maps = generate_sampling_maps(width, height, patch_size, number_of_lut,
 sampling_map = get_sampling_from_lut(sampling_maps) 
 
 # input image 
-image = cv2.imread('./test/gray/gray3.jpg',cv2.IMREAD_GRAYSCALE)
+image = cv2.imread('./test/t33.png',cv2.IMREAD_GRAYSCALE)
 # print(f'imagebeforegray shape:{image.shape},type:{type(image)}')
 # image = 0.299*image[:, :,0] + 0.587*image[:, :,1] + 0.114*image[:, :,2]
 # image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -312,7 +312,7 @@ image = cv2.imread('./test/gray/gray3.jpg',cv2.IMREAD_GRAYSCALE)
 patches, coords = extract_patches(image, sampling_map, patch_size)
 
 # DCT变换，硬阈值处理，IDCT变换
-threshold = 25  # 设定硬阈值
+threshold = 74  # 设定硬阈值
 denoised_patches = []
 for patch in patches:
     dct_patch = dct_2d(patch,DCTbasis)
@@ -326,7 +326,7 @@ denoised_image = np.array(denoised_image)
 # print(type(denoised_image))
 # print(denoised_image.shape)
 
-cv2.imwrite("./test/DCT_gray3.jpg",denoised_image)
+cv2.imwrite("./test/DCT/t33.jpg",denoised_image)
 
 
 

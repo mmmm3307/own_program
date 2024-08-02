@@ -20,9 +20,9 @@ def estimate_noise_std(image):
     return noise_std
 
 # 读取图像
-image = cv2.imread('/home/ciiv04/program/own_program/Python/test/gray/gray3.jpg')
+image = cv2.imread('/home/ciiv04/program/own_program/Python/test/t33.png')
 
 # 估计噪声标准差
 noise_std = estimate_noise_std(image)
 
-print(f"Estimated noise standard deviation:1 {noise_std}")
+print(f"Estimated noise standard deviation: {noise_std}")
