@@ -458,12 +458,12 @@ if __name__ == '__main__':
     
     cv2.setUseOptimized(True)  # OpenCV 中的很多函数都被优化过（使用 SSE2，AVX 等）。也包含一些没有被优化的代码。使用函数 cv2.setUseOptimized() 来开启优化。
 
-    img = cv2.imread('/home/ciiv04/program/own_program/Python/test/t22.png',cv2.IMREAD_GRAYSCALE)
+    img = cv2.imread('/home/ciiv04/program/own_program/Python/test/test4.jpg',cv2.IMREAD_GRAYSCALE)
     Basic_img = BM3D_1st_step(img)
-    cv2.imwrite("/home/ciiv04/program/own_program/Python/test/BM3D/basic/t22_basic.jpg", Basic_img)
+    cv2.imwrite("/home/ciiv04/program/own_program/Python/test/BM3D/basic/test4_basic.jpg", Basic_img)
 
     # Basic_img = cv2.imread("./img/denoised.png", cv2.IMREAD_GRAYSCALE)
 
     Final_img = BM3D_2nd_step(Basic_img, img)
-    cv2.imwrite("/home/ciiv04/program/own_program/Python/test/BM3D/final/t22_final.jpg", Final_img)
+    cv2.imwrite("/home/ciiv04/program/own_program/Python/test/BM3D/final/test4_final.jpg", Final_img)
 

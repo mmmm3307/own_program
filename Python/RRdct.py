@@ -291,7 +291,7 @@ def patches_to_image(patches, coords, width, height, patch_size):
 #     return thresholded_patch
 
 # 生成1920x1080的采样图和采样图LUT
-width, height  = 640, 480
+width, height  = 640, 512
 patch_size = 8
 number_of_lut = 1   #生成查找表个数
 d = 3  # 设定mind值
@@ -301,7 +301,7 @@ sampling_maps = generate_sampling_maps(width, height, patch_size, number_of_lut,
 sampling_map = get_sampling_from_lut(sampling_maps) 
 
 # input image 
-image = cv2.imread('./test/t33.png',cv2.IMREAD_GRAYSCALE)
+image = cv2.imread('/home/ciiv04/program/own_program/Python/test/test4.jpg',cv2.IMREAD_GRAYSCALE)
 # print(f'imagebeforegray shape:{image.shape},type:{type(image)}')
 # image = 0.299*image[:, :,0] + 0.587*image[:, :,1] + 0.114*image[:, :,2]
 # image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -326,7 +326,7 @@ denoised_image = np.array(denoised_image)
 # print(type(denoised_image))
 # print(denoised_image.shape)
 
-cv2.imwrite("./test/DCT/t33.jpg",denoised_image)
+cv2.imwrite("./test/DCT/test4.jpg",denoised_image)
 
 
 
